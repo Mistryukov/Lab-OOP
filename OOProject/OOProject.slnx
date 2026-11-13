@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="../PersonLib/PersonLib.csproj" />
+  <Project Path="OOProject.csproj" />
+</Solution>

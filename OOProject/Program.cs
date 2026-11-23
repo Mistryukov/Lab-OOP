@@ -9,6 +9,9 @@ internal class Program
         Console.WriteLine(pers1.GetInfo());
         Person pers2 = new Person("Илья","Муромец",52,Sex.Male);
         Console.WriteLine(pers2.GetInfo());
+
+       List aaa = new System.Collections.Generic.List();
+
     }
 }
     

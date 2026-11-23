@@ -1,4 +1,6 @@
-﻿using System.Drawing;
+﻿using System;
+using System.ComponentModel;
+using System.Drawing;
 using System.Reflection;
 
 namespace PersonLib
@@ -77,6 +79,45 @@ namespace PersonLib
                 $" {Age}\n" +
                 $" {Sex}\n"; ;
         }
+
+    }
+
+    public class PersonList<Person>
+    {
+        private Person[] _items;
+        private int _index;
+        private int _count;
+
+        public void Add(Person item)
+        {
+            //_items.Add(item);
+        }
+
+
+
+
+
+
+            // Adds the given object to the end of this list. The size of the list is
+            // increased by one. If required, the capacity of the list is doubled
+            // before adding the new element.
+            //
+       //[MethodImpl(MethodImplOptions.AggressiveInlining)]
+       //public void Add(T item)
+       //{
+       //    _version++;
+       //    T[] array = _items;
+       //    int size = _size;
+       //    if ((uint)size < (uint)array.Length)
+       //    {
+       //        _size = size + 1;
+       //        array[size] = item;
+       //    }
+       //    else
+       //    {
+       //        AddWithResize(item);
+       //    }
+       //}
 
     }
 }

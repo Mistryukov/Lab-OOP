@@ -77,7 +77,7 @@ namespace PersonLib
                 $" {Name}\n" +
                 $" {Surname}\n" +
                 $" {Age}\n" +
-                $" {Sex}\n"; ;
+                $" {Sex}\n";
         }
 
     }
@@ -113,12 +113,12 @@ namespace PersonLib
 
         private void Expand()
         {
-            Person[] _newItems = new Person[_items.Length+1];
+            Person[] newItems = new Person[_items.Length+1];
             for (int i = 0; i < _items.Length; i++)
             {
-                _newItems[i] = _items[i];
+                newItems[i] = _items[i];
             }
-            _items = _newItems;
+            _items = newItems;
         }
 
         public Person this[int index]
@@ -141,7 +141,7 @@ namespace PersonLib
             }
         }
 
-        public void Delete(int index)
+        public void RemoveAt(int index)
         {
             if ( index<0 || index>=_count)
             {
@@ -174,6 +174,15 @@ namespace PersonLib
                 _items[i] = null;
             }
             _count = 0;
+        }
+
+        public void Remove(Person item)
+        {
+            int index = IndexOf(item);
+            if (index != -1)
+            {
+                RemoveAt(index);
+            }
         }
     }
 }

@@ -82,42 +82,98 @@ namespace PersonLib
 
     }
 
-    public class PersonList<Person>
+    public class PersonList
     {
         private Person[] _items;
-        private int _index;
         private int _count;
+
+        public int Count
+        {
+            get
+            {
+                return _count;
+            }
+        }
+
+        public PersonList()
+        {
+            _items = new Person[3];
+            _count = 0;
+        }
 
         public void Add(Person item)
         {
-            //_items.Add(item);
+            if (_count == _items.Length)
+            {
+                Expand();
+            }
+            _items[_count] = item;
+            _count++;
         }
 
+        private void Expand()
+        {
+            Person[] _newItems = new Person[_items.Length+1];
+            for (int i = 0; i < _items.Length; i++)
+            {
+                _newItems[i] = _items[i];
+            }
+            _items = _newItems;
+        }
 
+        public Person this[int index]
+        {
+            get
+            {
+                if (index<0 || index>=_count)
+                {
+                    throw new IndexOutOfRangeException();
+                }
+                else return _items[index];
+            }
+            set
+            {
+                if (index < 0 || index >= _count)
+                {
+                    throw new IndexOutOfRangeException();
+                }
+                else _items[index] = value;
+            }
+        }
 
+        public void Delete(int index)
+        {
+            if ( index<0 || index>=_count)
+            {
+                throw new IndexOutOfRangeException();
+            }
+            for (int i = index; i < _count - 1 ; i++)
+            {
+                _items[i] = _items[i + 1];
+            }
+            _count--;
+            _items[_count] = null;
+        }
 
+        public int IndexOf(Person item)
+        {
+            for (int i = 0; i < _count; i++)
+            {
+                if (_items[i] == item)
+                {
+                    return i;
+                }
+            }
+            return -1;
+        }
 
-
-            // Adds the given object to the end of this list. The size of the list is
-            // increased by one. If required, the capacity of the list is doubled
-            // before adding the new element.
-            //
-       //[MethodImpl(MethodImplOptions.AggressiveInlining)]
-       //public void Add(T item)
-       //{
-       //    _version++;
-       //    T[] array = _items;
-       //    int size = _size;
-       //    if ((uint)size < (uint)array.Length)
-       //    {
-       //        _size = size + 1;
-       //        array[size] = item;
-       //    }
-       //    else
-       //    {
-       //        AddWithResize(item);
-       //    }
-       //}
-
+        public void Clear()
+        {
+            for (int i = 0; i < _count; i++)
+            {
+                _items[i] = null;
+            }
+            _count = 0;
+        }
     }
 }

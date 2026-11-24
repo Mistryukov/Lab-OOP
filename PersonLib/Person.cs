@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Drawing;
 using System.Reflection;
+using System.Text.RegularExpressions;
 
 namespace PersonLib
 {
@@ -17,44 +18,44 @@ namespace PersonLib
         private int _age;
         private Sex _sex;
 
-        public string Name { get; set; } //Убрать гет сет
-        //Заготовка для проверок
-        //{
-        //    get
-        //    {
-        //        return _name;
-        //    }
-        //    set
-        //    {
-        //        _name = value;
-        //    }
-        //}
+        public string Name
+        {
+            get
+            {
+                return _name;
+            }
+            set
+            {
+                _name = StringFormat.NameFormat(value);
+            }
+        }
 
-        public string Surname { get; set; } //Убрать гет сет
-        //Заготовка для проверок
-        //{
-        //    get
-        //    {
-        //        return _surname;
-        //    }
-        //    set
-        //    {
-        //        _surname = value;
-        //    }
-        //}
+        public string Surname
+        {
+            get
+            {
+                return _surname;
+            }
+            set
+            {
+                _surname = StringFormat.NameFormat(value);
+            }
+        }
 
-        public int Age { get; set; } //Убрать гет сет
-        //Заготовка для проверок
-        //{
-        //    get
-        //    {
-        //        return _age;
-        //    }
-        //    set
-        //    {
-        //        _age = value;
-        //    }
-        //}
+        public int Age
+        {
+            get
+            {
+                return _age;
+            }
+            set
+            {
+                if (value >= 0)
+                {
+                    _age = value;
+                }
+            }
+        }
 
         public Sex Sex { get; set; }
 
@@ -193,5 +194,33 @@ namespace PersonLib
                 RemoveAt(index);
             }
         }           
+    }
+
+    public static class StringFormat
+    {
+        public static string NameFormat(string value)
+        {
+            if (string.IsNullOrEmpty(value))
+            {
+                throw new ArgumentException("Имя не может быть пустым");
+            }
+
+            value = Regex.Replace(value.Trim(), @"\s+", " ");
+
+            string pattern = @"^[А-Яа-яЁёA-Za-z]+(?:[ -][А-Яа-яЁёA-Za-z]+)*$";
+            if (!Regex.IsMatch(value, pattern))
+            {
+                throw new ArgumentException("Допускаются только русские и английские буквы, пробелы и дефисы");
+            }
+
+            string[] words = value.ToLower().Split(' ', '-');
+            for (int i = 0; (i < words.Length);  i++)
+            {
+                char[] letters = words[i].ToCharArray();
+                letters[0] = Char.ToUpper(letters[0]);
+                words[i] = string.Join("", letters);
+            }
+            return string.Join("-", words);                
+        }
     }
 }

@@ -29,15 +29,9 @@ internal class Program
         Console.Clear();
 
         Console.WriteLine("В первом списке " + FirstList.Count + " человека: ");
-        Console.WriteLine("Персоны, входящие в первый список");
-        Console.WriteLine(FirstList[0].GetInfo());
-        Console.WriteLine(FirstList[1].GetInfo());
-        Console.WriteLine(FirstList[2].GetInfo());
+        ListInfo(FirstList);
         Console.WriteLine("Во втором списке " + SecondList.Count + " человека: ");
-        Console.WriteLine("Персоны, входящие во второй список");
-        Console.WriteLine(SecondList[0].GetInfo());
-        Console.WriteLine(SecondList[1].GetInfo());
-        Console.WriteLine(SecondList[2].GetInfo());
+        ListInfo(SecondList);
 
         //Добавление нового человека в первый список
         Console.WriteLine("Нажмите любую клавишу для добавления человека в 1 список");
@@ -50,6 +44,8 @@ internal class Program
 
         Console.WriteLine("В первый список добавлен следующий человек:");
         Console.WriteLine(FirstList[3].GetInfo());
+        Console.WriteLine("Состав первого списка:");
+        ListInfo(FirstList);
 
         //Копирование второго человека из 1 списка в конец 2 списка
         Console.WriteLine("Нажмите любую клавишу для копирования человека из 1 списка");
@@ -60,12 +56,10 @@ internal class Program
         SecondList.Add(FirstList[1]);
 
         Console.WriteLine("Проверка копирования человека");
-        Console.WriteLine("В первом списке " + FirstList.Count + " человека: ");
-        Console.WriteLine("Второй человек в 1 списке:");
-        Console.WriteLine(FirstList[1].GetInfo());
-        Console.WriteLine("Во втором списке " + SecondList.Count + " человека: ");
-        Console.WriteLine("Четвертый человек во 2 списке:");
-        Console.WriteLine(SecondList[3].GetInfo());
+        Console.WriteLine("Первый список: ");
+        ListInfo(FirstList);
+        Console.WriteLine("Второй список: ");
+        ListInfo(SecondList);
 
         //Удаление второго человека из 1 списка
         Console.WriteLine("Нажмите любую клавишу для удаления человека из 1 списка");
@@ -76,10 +70,10 @@ internal class Program
         FirstList.RemoveAt(1);
 
         Console.WriteLine("Проверка удаления человека");
-        Console.WriteLine("В первом списке " + FirstList.Count + " человека: ");
-        Console.WriteLine(FirstList[1].GetInfo());
-        Console.WriteLine("Во втором списке " + SecondList.Count + " человека: ");
-        Console.WriteLine(SecondList[3].GetInfo());
+        Console.WriteLine("Первый список: ");
+        ListInfo(FirstList);
+        Console.WriteLine("Второй список: ");
+        ListInfo(SecondList);
 
         //Очистка второго списка
         Console.WriteLine("Нажмите любую клавишу для очистки 2 списка");
@@ -90,9 +84,12 @@ internal class Program
         SecondList.Clear();
         Console.WriteLine("Проверка очистки списка");
         Console.WriteLine("Во втором списке " + SecondList.Count + " человек: ");
+        ListInfo(SecondList);
 
         Person NewPerson = CreatePerson();
         Console.WriteLine(NewPerson.GetInfo());
+
+        ListInfo(FirstList);
 
 
 
@@ -122,6 +119,13 @@ internal class Program
         }
 
         return new Person(name, surname, age, sex);
-    } 
+    }
+    public static void ListInfo(PersonList list)
+    {
+        for (int i = 0; i < list.Count; i++)
+        {
+            Console.WriteLine(list[i].GetInfo());
+        }
+    }
 }
     

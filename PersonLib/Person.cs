@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Drawing;
 using System.Reflection;
+using System.Text.RegularExpressions;
 
 namespace PersonLib
 {
@@ -10,6 +11,7 @@ namespace PersonLib
         Male,
         Female
     }
+
     public class Person
     {
         private string _name;
@@ -17,44 +19,44 @@ namespace PersonLib
         private int _age;
         private Sex _sex;
 
-        public string Name { get; set; } //Убрать гет сет
-        //Заготовка для проверок
-        //{
-        //    get
-        //    {
-        //        return _name;
-        //    }
-        //    set
-        //    {
-        //        _name = value;
-        //    }
-        //}
+        public string Name
+        {
+            get
+            {
+                return _name;
+            }
+            set
+            {
+                _name = StringFormat.NameFormat(value);
+            }
+        }
 
-        public string Surname { get; set; } //Убрать гет сет
-        //Заготовка для проверок
-        //{
-        //    get
-        //    {
-        //        return _surname;
-        //    }
-        //    set
-        //    {
-        //        _surname = value;
-        //    }
-        //}
+        public string Surname
+        {
+            get
+            {
+                return _surname;
+            }
+            set
+            {
+                _surname = StringFormat.NameFormat(value);
+            }
+        }
 
-        public int Age { get; set; } //Убрать гет сет
-        //Заготовка для проверок
-        //{
-        //    get
-        //    {
-        //        return _age;
-        //    }
-        //    set
-        //    {
-        //        _age = value;
-        //    }
-        //}
+        public int Age
+        {
+            get
+            {
+                return _age;
+            }
+            set
+            {
+                if (value >= 0)
+                {
+                    _age = value;
+                }
+            }
+        }
 
         public Sex Sex { get; set; }
 
@@ -72,8 +74,35 @@ namespace PersonLib
         public string GetInfo()
         {
             return $" {Name}; {Surname}; {Age}; {Sex}";
+        }       
+
+        public static Person GetRandomPerson()
+        {
+            Random random = new Random();
+            string[] names = { 
+                "Боб", 
+                "Джек", 
+                "Марти", 
+                "Розалия", 
+                "Лусия" 
+            };
+            string[] surnames = { 
+                "Браун", 
+                "Гонзалес", 
+                "Саламанка", 
+                "Ричардс", 
+                "Трамп" 
+            };
+
+            string name = names[random.Next(names.Length)];
+            string surname = surnames[random.Next(surnames.Length)];
+            int age = random.Next(0, 99);
+            Sex sex = (Sex)random.Next(0,2);
+
+            return new Person(name, surname, age, sex);
         }
     }
+
 
     public class PersonList
     {
@@ -172,10 +201,43 @@ namespace PersonLib
         public void Remove(Person item)
         {
             int index = IndexOf(item);
+
             if (index != -1)
             {
                 RemoveAt(index);
             }
+        }           
+    }
+
+    public static class StringFormat
+    {
+        public static string NameFormat(string value)
+        {
+            if (string.IsNullOrEmpty(value))
+            {
+                throw new ArgumentException("Имя не может быть пустым");
+            }
+
+            value = Regex.Replace(value.Trim(), @"\s+", " ");
+
+            string pattern = @"^[А-Яа-яЁёA-Za-z]+(?:[ -][А-Яа-яЁёA-Za-z]+)*$";
+
+            if (!Regex.IsMatch(value, pattern))
+            {
+                throw new ArgumentException(
+                    "Введенные данные не соответствуют формату"
+                    );
+            }
+
+            string[] words = value.ToLower().Split(' ', '-');
+
+            for (int i = 0; (i < words.Length);  i++)
+            {
+                char[] letters = words[i].ToCharArray();
+                letters[0] = Char.ToUpper(letters[0]);
+                words[i] = string.Join("", letters);
+            }
+            return string.Join("-", words);                
         }
     }
 }

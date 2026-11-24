@@ -17,24 +17,34 @@ internal class Program
         FirstList.Add(PersonOne);
         FirstList.Add(PersonTwo);
         FirstList.Add(PersonThree);
+
         PersonList SecondList = new PersonList();
         SecondList.Add(PersonFour);
         SecondList.Add(PersonFive);
         SecondList.Add(PersonSix);
         
         //Вывод содержимого списков на экран
-        Console.WriteLine("Нажмите любую клавишу для отображения содержимого списков");
+        Console.WriteLine(
+            "Нажмите любую клавишу " +
+            "для отображения содержимого списков"
+            );
         Console.ReadKey();
         Console.WriteLine();
         Console.Clear();
         
-        Console.WriteLine("В первом списке " + FirstList.Count + " человека: ");
+        Console.WriteLine(
+            "В первом списке " + FirstList.Count + " человека: "
+            );
         ListInfo(FirstList);
-        Console.WriteLine("Во втором списке " + SecondList.Count + " человека: ");
+        Console.WriteLine(
+            "Во втором списке " + SecondList.Count + " человека: "
+            );
         ListInfo(SecondList);
         
         //Добавление нового человека в первый список
-        Console.WriteLine("Нажмите любую клавишу для добавления человека в 1 список");
+        Console.WriteLine(
+            "Нажмите любую клавишу для добавления человека в 1 список"
+            );
         Console.ReadKey();
         Console.WriteLine();
         Console.Clear();
@@ -48,7 +58,9 @@ internal class Program
         ListInfo(FirstList);
         
         //Копирование второго человека из 1 списка в конец 2 списка
-        Console.WriteLine("Нажмите любую клавишу для копирования человека из 1 списка");
+        Console.WriteLine(
+            "Нажмите любую клавишу для копирования человека из 1 списка"
+            );
         Console.ReadKey();
         Console.WriteLine();
         Console.Clear();
@@ -62,7 +74,9 @@ internal class Program
         ListInfo(SecondList);
         
         //Удаление второго человека из 1 списка
-        Console.WriteLine("Нажмите любую клавишу для удаления человека из 1 списка");
+        Console.WriteLine(
+            "Нажмите любую клавишу для удаления человека из 1 списка"
+            );
         Console.ReadKey();
         Console.WriteLine();
         Console.Clear();
@@ -83,7 +97,9 @@ internal class Program
         
         SecondList.Clear();
         Console.WriteLine("Проверка очистки списка");
-        Console.WriteLine("Во втором списке " + SecondList.Count + " человек: ");
+        Console.WriteLine(
+            "Во втором списке " + SecondList.Count + " человек: "
+            );
         ListInfo(SecondList);
         
         Person NewPerson = CreatePerson();
@@ -93,10 +109,9 @@ internal class Program
 
         Person RandomPerson = Person.GetRandomPerson();
         Console.WriteLine(RandomPerson.GetInfo());
-
-
-
     }
+
+
     static Person CreatePerson()
     {
         Console.WriteLine("Введите имя (только ru/eng символы): ");
@@ -107,16 +122,22 @@ internal class Program
     
         Console.WriteLine("Введите возраст (число полных лет): ");
         int age;
+
         while (!int.TryParse(Console.ReadLine(), out age) || age < 0)
         {
-            Console.WriteLine("Неверный формат ввода, введите число больше или равное нулю");
+            Console.WriteLine(
+                "Неверный формат ввода, введите число больше или равное нулю"
+                );
         }
 
-        Console.WriteLine("Введите цифру, означающую пол или название пола на английском");
+        Console.WriteLine(
+            "Введите цифру, означающую пол или название пола на английском"
+            );
         Console.WriteLine("0/Male - Мужской");
         Console.WriteLine("1/Female - женский");
         Sex sex;
-        while (!Enum.TryParse(Console.ReadLine(), out sex) || !Enum.IsDefined(typeof(Sex), sex))
+        while (!Enum.TryParse(Console.ReadLine(), out sex) 
+            || !Enum.IsDefined(typeof(Sex), sex))
         {
             Console.WriteLine("Неверное значение, попробуйте снова");
         }

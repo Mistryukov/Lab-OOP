@@ -11,6 +11,7 @@ namespace PersonLib
         Male,
         Female
     }
+
     public class Person
     {
         private string _name;
@@ -78,19 +79,30 @@ namespace PersonLib
         public static Person GetRandomPerson()
         {
             Random random = new Random();
-            string[] names = { "Боб", "Джек", "Марти", "Розалия", "Лусия" };
-            string[] surnames = { "Браун", "Гонзалес", "Саламанка", "Ричардс", "Трамп" };
+            string[] names = { 
+                "Боб", 
+                "Джек", 
+                "Марти", 
+                "Розалия", 
+                "Лусия" 
+            };
+            string[] surnames = { 
+                "Браун", 
+                "Гонзалес", 
+                "Саламанка", 
+                "Ричардс", 
+                "Трамп" 
+            };
 
             string name = names[random.Next(names.Length)];
             string surname = surnames[random.Next(surnames.Length)];
-
             int age = random.Next(0, 99);
-
             Sex sex = (Sex)random.Next(0,2);
 
             return new Person(name, surname, age, sex);
         }
     }
+
 
     public class PersonList
     {
@@ -189,6 +201,7 @@ namespace PersonLib
         public void Remove(Person item)
         {
             int index = IndexOf(item);
+
             if (index != -1)
             {
                 RemoveAt(index);
@@ -208,12 +221,16 @@ namespace PersonLib
             value = Regex.Replace(value.Trim(), @"\s+", " ");
 
             string pattern = @"^[А-Яа-яЁёA-Za-z]+(?:[ -][А-Яа-яЁёA-Za-z]+)*$";
+
             if (!Regex.IsMatch(value, pattern))
             {
-                throw new ArgumentException("Допускаются только русские и английские буквы, пробелы и дефисы");
+                throw new ArgumentException(
+                    "Введенные данные не соответствуют формату"
+                    );
             }
 
             string[] words = value.ToLower().Split(' ', '-');
+
             for (int i = 0; (i < words.Length);  i++)
             {
                 char[] letters = words[i].ToCharArray();

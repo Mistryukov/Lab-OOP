@@ -69,17 +69,10 @@ namespace PersonLib
         public Person(): this("Иван","Петров",25,Sex.Male)
         { }
 
-
-
         public string GetInfo()
         {
-            return "Person:\n" +
-                $" {Name}\n" +
-                $" {Surname}\n" +
-                $" {Age}\n" +
-                $" {Sex}\n";
+            return $" {Name}; {Surname}; {Age}; {Sex}";
         }
-
     }
 
     public class PersonList

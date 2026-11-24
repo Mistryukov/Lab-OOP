@@ -73,6 +73,18 @@ namespace PersonLib
         {
             return $" {Name}; {Surname}; {Age}; {Sex}";
         }
+
+        //public static Person ReadFromConsole()
+        //{
+        //    Console.WriteLine("Введите имя (только ru/eng символы): ");
+        //    string name = Console.ReadLine();
+        //
+        //    Console.WriteLine("Введите фамилию (только ru/eng символы): ");
+        //    string surname = Console.ReadLine();
+        //
+        //    Console.WriteLine("Введите возраст: ");
+        //
+        //
     }
 
     public class PersonList
@@ -176,6 +188,6 @@ namespace PersonLib
             {
                 RemoveAt(index);
             }
-        }
+        }           
     }
 }

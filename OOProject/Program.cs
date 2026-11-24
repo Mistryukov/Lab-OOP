@@ -6,7 +6,7 @@ internal class Program
     {
         //Демонстрация правильности работы
         Person PersonOne = new Person();
-        Person PersonTwo = new Person("Илья","Муромец",52,Sex.Male);
+        Person PersonTwo = new Person("Илья", "Муромец", 52, Sex.Male);
         Person PersonThree = new Person("Хилари", "Клинтон", 66, Sex.Female);
         Person PersonFour = new Person("Змей", "Тугарин", 28, Sex.Male);
         Person PersonFive = new Person("Добрыня", "Никитич", 48, Sex.Male);
@@ -57,7 +57,7 @@ internal class Program
         Console.WriteLine();
         Console.Clear();
 
-        SecondList.Add(FirstList[1]);   
+        SecondList.Add(FirstList[1]);
 
         Console.WriteLine("Проверка копирования человека");
         Console.WriteLine("В первом списке " + FirstList.Count + " человека: ");
@@ -91,6 +91,37 @@ internal class Program
         Console.WriteLine("Проверка очистки списка");
         Console.WriteLine("Во втором списке " + SecondList.Count + " человек: ");
 
+        Person NewPerson = CreatePerson();
+        Console.WriteLine(NewPerson.GetInfo());
+
+
+
     }
+    static Person CreatePerson()
+    {
+        Console.WriteLine("Введите имя (только ru/eng символы): ");
+        string name = Console.ReadLine();
+    
+        Console.WriteLine("Введите фамилию (только ru/eng символы): ");
+        string surname = Console.ReadLine();
+    
+        Console.WriteLine("Введите возраст (число полных лет): ");
+        int age;
+        while (!int.TryParse(Console.ReadLine(), out age) || age < 0)
+        {
+            Console.WriteLine("Неверный формат ввода, введите число больше или равное нулю");
+        }
+
+        Console.WriteLine("Введите цифру, означающую пол или название пола на английском");
+        Console.WriteLine("0/Male - Мужской");
+        Console.WriteLine("1/Female - женский");
+        Sex sex;
+        while (!Enum.TryParse(Console.ReadLine(), out sex) || !Enum.IsDefined(typeof(Sex), sex))
+        {
+            Console.WriteLine("Неверное значение, попробуйте снова");
+        }
+
+        return new Person(name, surname, age, sex);
+    } 
 }
     

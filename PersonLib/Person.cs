@@ -73,6 +73,22 @@ namespace PersonLib
         {
             return $" {Name}; {Surname}; {Age}; {Sex}";
         }       
+
+        public static Person GetRandomPerson()
+        {
+            Random random = new Random();
+            string[] names = { "Боб", "Джек", "Марти", "Розалия", "Лусия" };
+            string[] surnames = { "Браун", "Гонзалес", "Саламанка", "Ричардс", "Трамп" };
+
+            string name = names[random.Next(names.Length)];
+            string surname = surnames[random.Next(surnames.Length)];
+
+            int age = random.Next(0, 99);
+
+            Sex sex = (Sex)random.Next(0,2);
+
+            return new Person(name, surname, age, sex);
+        }
     }
 
     public class PersonList

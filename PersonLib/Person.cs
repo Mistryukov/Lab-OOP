@@ -6,12 +6,18 @@ using System.Text.RegularExpressions;
 
 namespace PersonLib
 {
+    /// <summary>
+    /// Пол человека. Их два. Итого один целый.
+    /// </summary>
     public enum Sex
     {
         Male,
         Female
     }
 
+    /// <summary>
+    /// Хранит и предоставляет доступ к набору личной информации о человеке
+    /// </summary>
     public class Person
     {
         private string _name;
@@ -71,11 +77,19 @@ namespace PersonLib
         public Person(): this("Иван","Петров",25,Sex.Male)
         { }
 
+        /// <summary>
+        /// Предоставляет все данные о персоне
+        /// </summary>
+        /// <returns>Строка с информацией из  полей конкретной персоны</returns>
         public string GetInfo()
         {
             return $" {Name}; {Surname}; {Age}; {Sex}";
-        }       
+        }
 
+        /// <summary>
+        /// Создает условно случайную персону из набора имен и фамилий
+        /// </summary>
+        /// <returns>Заполненный объект класса Person</returns>
         public static Person GetRandomPerson()
         {
             Random random = new Random();
@@ -104,6 +118,9 @@ namespace PersonLib
     }
 
 
+    /// <summary>
+    /// Хранит множество объектов класса Person. Позволяет проводить операции над отдельными объектами и группами объектов класса Person
+    /// </summary>
     public class PersonList
     {
         private Person[] _items;
@@ -123,6 +140,10 @@ namespace PersonLib
             _count = 0;
         }
 
+        /// <summary>
+        /// Добавляет существующую персону в список
+        /// </summary>
+        /// <param name="item"></param>
         public void Add(Person item)
         {
             if (_count == _items.Length)
@@ -163,6 +184,11 @@ namespace PersonLib
             }
         }
 
+        /// <summary>
+        /// Удаляет из списка персону, соответствующую заданному индексу
+        /// </summary>
+        /// <param name="index"></param>
+        /// <exception cref="IndexOutOfRangeException"></exception>
         public void RemoveAt(int index)
         {
             if ( index<0 || index>=_count)
@@ -177,6 +203,11 @@ namespace PersonLib
             _items[_count] = null;
         }
 
+        /// <summary>
+        /// Возвращает индекс персоны из списка по заданному названию персоны
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns>Индекс персоны или "-1" при отсутствии персоны в списке</returns>
         public int IndexOf(Person item)
         {
             for (int i = 0; i < _count; i++)
@@ -188,8 +219,10 @@ namespace PersonLib
             }
             return -1;
         }
-
-        public void Clear()
+        /// <summary>
+        /// Очищает список, удаляя всех персон
+        /// </summary>
+        public void ClearList()
         {
             for (int i = 0; i < _count; i++)
             {
@@ -198,6 +231,10 @@ namespace PersonLib
             _count = 0;
         }
 
+        /// <summary>
+        /// Удаляет из списка персону по заданному названию
+        /// </summary>
+        /// <param name="item"></param>
         public void Remove(Person item)
         {
             int index = IndexOf(item);
@@ -209,8 +246,17 @@ namespace PersonLib
         }           
     }
 
+    /// <summary>
+    /// Предоставляет набор методов взаимодействия со строками и приведением их к определенному формату
+    /// </summary>
     public static class StringFormat
     {
+        /// <summary>
+        /// Обрабатывает входную строку, приводя ее к заданному формату (формат фиксирован)
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns>Строка, приведенная под формат</returns>
+        /// <exception cref="ArgumentException"></exception>
         public static string NameFormat(string value)
         {
             if (string.IsNullOrEmpty(value))

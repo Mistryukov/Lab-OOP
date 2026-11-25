@@ -95,23 +95,27 @@ internal class Program
         Console.WriteLine();
         Console.Clear();
         
-        SecondList.Clear();
+        SecondList.ClearList();
         Console.WriteLine("Проверка очистки списка");
         Console.WriteLine(
             "Во втором списке " + SecondList.Count + " человек: "
             );
         ListInfo(SecondList);
         
+        //Создание персоны через консольный ввод
         Person NewPerson = CreatePerson();
         Console.WriteLine(NewPerson.GetInfo());
-        
-        ListInfo(FirstList);
 
+        //Создание рандомной персоны
         Person RandomPerson = Person.GetRandomPerson();
         Console.WriteLine(RandomPerson.GetInfo());
     }
 
 
+    /// <summary>
+    /// Создает персону путем заполнения всех полей поочередно через консольный ввод
+    /// </summary>
+    /// <returns>Заполненный объект класса Person</returns>
     static Person CreatePerson()
     {
         Console.WriteLine("Введите имя (только ru/eng символы): ");
@@ -135,6 +139,7 @@ internal class Program
             );
         Console.WriteLine("0/Male - Мужской");
         Console.WriteLine("1/Female - женский");
+
         Sex sex;
         while (!Enum.TryParse(Console.ReadLine(), out sex) 
             || !Enum.IsDefined(typeof(Sex), sex))
@@ -144,6 +149,11 @@ internal class Program
 
         return new Person(name, surname, age, sex);
     }
+
+    /// <summary>
+    /// Выводит в консоль данные о всех персонах, находящихся в списке
+    /// </summary>
+    /// <param name="list"></param>
     public static void ListInfo(PersonList list)
     {
         for (int i = 0; i < list.Count; i++)

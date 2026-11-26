@@ -10,25 +10,18 @@ namespace PersonLib
     /// Хранит и предоставляет доступ к набору личной информации о человеке
     /// </summary>
     public class Person
-    {
-        /// <summary>
-        /// Русский формат для имен-фамилий
-        /// </summary>
-        /// //TODO: RSDN
-        /// //TODO: duplication
-        private string russianPattern = @"^[А-Яа-яЁё]+(?:[ -][А-Яа-яЁё]+)*$";
-        
-        //TODO: RSDN
+    {        
+        //TODO: RSDN +
         /// <summary>
         /// Максимальный возраст
         /// </summary>
-        const int MaxAge = 120;
+        public const int MaxAge = 120;
 
-        //TODO: RSDN
+        //TODO: RSDN +
         /// <summary>
         /// Минимальный   возраст
         /// </summary>
-        const int MinAge = 0;
+        public const int MinAge = 0;
 
         /// <summary>
         /// Приватное поле, обозначающее имя персоны
@@ -56,7 +49,7 @@ namespace PersonLib
             }
             set
             {                
-                //TODO: validation
+                //TODO: validation см. след.
                 _name = StringFormat.NameFormat(value);                
             }
         }
@@ -72,8 +65,8 @@ namespace PersonLib
             }
             set
             {
-                //TODO: validation
-                if (Regex.IsMatch(_name, russianPattern))
+                //TODO: validation добавить в стрингформат метод который будет сравнивать два поступающих значения  (имя фамилия в любом порядке) на раскладку (ру/англ)
+                if (Regex.IsMatch(_name, StringFormat.RussianPattern))
                 {
                     _surname = StringFormat.RussianFormat(value);
                 }
@@ -97,9 +90,11 @@ namespace PersonLib
             {
                 if (value >= MaxAge || value <= MinAge)
                 {
-                    //TODO: RSDN
-                    //TODO: duplication
-                    throw new ArgumentException("Возраст вне допустимого диапазона (0-120)");
+                    //TODO: RSDN +
+                    //TODO: duplication +
+                    throw new ArgumentException(
+                        $"Возраст вне допустимого диапазона ({MinAge}-{MaxAge})"
+                        );
                 }
                 _age = value;
             }

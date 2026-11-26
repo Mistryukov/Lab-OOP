@@ -10,10 +10,16 @@ namespace PersonLib
     /// </summary>
     public class PersonList
     {
-        //TODO: XML
+        //TODO: XML +
+        /// <summary>
+        /// Размер списка по умолчанию
+        /// </summary>
         private const int DefaultListLenght = 4;
 
-        //TODO: XML
+        //TODO: XML +
+        /// <summary>
+        /// Множитель изменения размера списка
+        /// </summary>
         private const int GrowthFactor = 2;
         
         /// <summary>
@@ -99,7 +105,13 @@ namespace PersonLib
             }
         }
 
-        //TODO: XML
+        //TODO: XML +
+        /// <summary>
+        /// Позволяет обращаться к объектам класса Person, 
+        /// находящихся в списках PersonList, по внутренним индексам
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns>Объект класса Person из списка</returns>
         public Person this[int index]
         {
             get

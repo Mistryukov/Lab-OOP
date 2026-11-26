@@ -12,6 +12,15 @@ namespace PersonLib
     public static class StringFormat
     {
         /// <summary>
+        /// Русский формат для имен-фамилий
+        /// </summary>
+        public const string RussianPattern = @"^[А-Яа-яЁё]+(?:[ -][А-Яа-яЁё]+)*$";
+
+        /// <summary>
+        /// Английский формат для имен-фамилий
+        /// </summary>
+        public const string EnglishPattern = @"^[A-Za-z]+(?:[ -][A-Za-z]+)*$";
+        /// <summary>
         /// Обрабатывает входную строку, приводя ее к заданному формату (формат фиксирован)
         /// </summary>
         /// <param name="value"></param>
@@ -20,12 +29,10 @@ namespace PersonLib
         public static string NameFormat(string value)
         {
             value = Regex.Replace(value.Trim(), @"\s+", " ");
-            //TODO: duplication
-            string russianPattern = @"^[А-Яа-яЁё]+(?:[ -][А-Яа-яЁё]+)*$";
-            string englishPattern = @"^[A-Za-z]+(?:[ -][A-Za-z]+)*$";
+            //TODO: duplication +
 
-            if (!Regex.IsMatch(value, russianPattern)
-                && !Regex.IsMatch(value, englishPattern))
+            if (!Regex.IsMatch(value, RussianPattern)
+                && !Regex.IsMatch(value, EnglishPattern))
             {
                 throw new ArgumentException(
                     "Введенные данные не соответствуют формату"
@@ -52,10 +59,9 @@ namespace PersonLib
         public static string RussianFormat(string value)
         {
             value = Regex.Replace(value.Trim(), @"\s+", " ");
-            //TODO: duplication
-            string russianPattern = @"^[А-Яа-яЁё]+(?:[ -][А-Яа-яЁё]+)*$";
+            //TODO: duplication +
 
-            if (!Regex.IsMatch(value, russianPattern))
+            if (!Regex.IsMatch(value, RussianPattern))
             {
                 throw new ArgumentException(
                     "Фамилия  тоже должна быть на русском языке"
@@ -82,10 +88,9 @@ namespace PersonLib
         public static string EnglishFormat(string value)
         {
             value = Regex.Replace(value.Trim(), @"\s+", " ");
-            //TODO: duplication
-            string englishPattern = @"^[A-Za-z]+(?:[ -][A-Za-z]+)*$";
+            //TODO: duplication +
 
-            if (!Regex.IsMatch(value, englishPattern))
+            if (!Regex.IsMatch(value, EnglishPattern))
             {
                 throw new ArgumentException(
                     "Surname must be also in english "

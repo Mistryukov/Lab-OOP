@@ -9,10 +9,16 @@ namespace PersonLib
     /// </summary>
     public enum Sex
     {
-        //TODO: XML
+        //TODO: XML +
+        /// <summary>
+        /// Мужской пол
+        /// </summary>
         Male,
 
-        //TODO: XML
+        /// <summary>
+        /// Женский пол
+        /// </summary>
+        //TODO: XML +
         Female
     }
 }

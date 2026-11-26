@@ -120,16 +120,28 @@ internal class Program
     {
         Console.WriteLine("Введите имя (только ru/eng символы): ");
         Person TemporaryPerson = new();
-        string name = Console.ReadLine();
+        
+        
         while (true)
         {
-            if (string.IsNullOrEmpty(name))
+            try
             {
-                Console.WriteLine(
-                    "Имя не может быть пустым"
-                    );
+                string name = Console.ReadLine();
+                if (string.IsNullOrEmpty(name))
+                {
+                    Console.WriteLine(
+                        "Имя не может быть пустым"
+                        );
+                    continue;
+                }
+
+                TemporaryPerson.Name = name;
+                break;
             }
-            TemporaryPerson.Name = name;
+            catch (ArgumentException exception)
+            {
+                Console.WriteLine(exception.InnerException);
+            }
         }
         
 

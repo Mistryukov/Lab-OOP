@@ -44,16 +44,8 @@ namespace PersonLib
             set
             {
                 {
-                    try
-                    {
-                        _name = StringFormat.NameFormat(value);
-                        break;
-                    }
-                
-                    catch (ArgumentException exception)
-                    {
-                        Console.WriteLine($"Ошибка: {exception.Message}. Попробуйте снова");
-                    }
+                    _name = StringFormat.NameFormat(value);
+                    
                 }
             }
         }

@@ -20,15 +20,59 @@ namespace PersonLib
         public static string NameFormat(string value)
         {
             value = Regex.Replace(value.Trim(), @"\s+", " ");
-            //TODO: different languages
-            string ruPattern = @"^[А-Яа-яЁё]+(?:[ -][А-Яа-яЁё]+)*$";
-            string engPattern = @"^[A-Za-z]+(?:[ -][A-Za-z]+)*$";
+            //TODO: different languages +
+            string russianPattern = @"^[А-Яа-яЁё]+(?:[ -][А-Яа-яЁё]+)*$";
+            string englishPattern = @"^[A-Za-z]+(?:[ -][A-Za-z]+)*$";
 
-            if (!Regex.IsMatch(value, ruPattern)
-                && !Regex.IsMatch(value, engPattern))
+            if (!Regex.IsMatch(value, russianPattern)
+                && !Regex.IsMatch(value, englishPattern))
             {
                 throw new ArgumentException(
                     "Введенные данные не соответствуют формату"
+                    );
+            }
+            string[] words = value.ToLower().Split(' ', '-');
+
+            for (int i = 0; (i < words.Length); i++)
+            {
+                char[] letters = words[i].ToCharArray();
+                letters[0] = Char.ToUpper(letters[0]);
+                words[i] = string.Join("", letters);
+            }
+            return string.Join("-", words);
+        }
+
+        public static string RussianFormat(string value)
+        {
+            value = Regex.Replace(value.Trim(), @"\s+", " ");
+            string russianPattern = @"^[А-Яа-яЁё]+(?:[ -][А-Яа-яЁё]+)*$";
+
+            if (!Regex.IsMatch(value, russianPattern))
+            {
+                throw new ArgumentException(
+                    "Фамилия  тоже должна быть на русском языке"
+                    );
+            }
+            string[] words = value.ToLower().Split(' ', '-');
+
+            for (int i = 0; (i < words.Length); i++)
+            {
+                char[] letters = words[i].ToCharArray();
+                letters[0] = Char.ToUpper(letters[0]);
+                words[i] = string.Join("", letters);
+            }
+            return string.Join("-", words);
+        }
+
+        public static string EnglishFormat(string value)
+        {
+            value = Regex.Replace(value.Trim(), @"\s+", " ");
+            string englishPattern = @"^[A-Za-z]+(?:[ -][A-Za-z]+)*$";
+
+            if (!Regex.IsMatch(value, englishPattern))
+            {
+                throw new ArgumentException(
+                    "Surname must be also in english "
                     );
             }
             string[] words = value.ToLower().Split(' ', '-');

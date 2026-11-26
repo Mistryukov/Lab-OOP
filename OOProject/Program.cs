@@ -118,10 +118,9 @@ internal class Program
     /// <returns>Заполненный объект класса Person</returns>
     static Person CreatePerson()
     {
-        Console.WriteLine("Введите имя (только ru/eng символы): ");
         Person TemporaryPerson = new();
-        
-        
+
+        Console.WriteLine("Введите имя (только ru/eng символы): ");
         while (true)
         {
             try
@@ -140,24 +139,55 @@ internal class Program
             }
             catch (ArgumentException exception)
             {
-                Console.WriteLine(exception.InnerException);
+                Console.WriteLine(exception.Message);
             }
         }
-        
 
         Console.WriteLine("Введите фамилию (только ru/eng символы): ");
-        string surname = Console.ReadLine();
-    
+        while (true)
+        {
+            try
+            {
+                string surname = Console.ReadLine();
+                if (string.IsNullOrEmpty(surname))
+                {
+                    Console.WriteLine(
+                        "Фамилия не может быть пустой"
+                        );
+                    continue;
+                }
+
+                TemporaryPerson.Surname = surname;
+                break;
+            }
+            catch (ArgumentException exception)
+            {
+                Console.WriteLine(exception.Message);
+            }
+        }
+
         Console.WriteLine("Введите возраст (число полных лет): ");
         int age;
-
-        while (!int.TryParse(Console.ReadLine(), out age) || age < 0)
+        while (true)
         {
-            Console.WriteLine(
-                "Неверный формат ввода, введите число больше или равное нулю"
-                );
+            try
+            {
+                if (!int.TryParse(Console.ReadLine(), out age) || age < 0)
+                {
+                    Console.WriteLine(
+                        "Неверный формат ввода, введите число больше или равное нулю"
+                        );
+                    continue;
+                }
+
+                TemporaryPerson.Age = age;
+                break;
+            }
+            catch (ArgumentException exception)
+            {
+                Console.WriteLine(exception.Message);
+            }
         }
-        TemporaryPerson.Age = age;
 
         Console.WriteLine(
             "Введите цифру, означающую пол или название пола на английском"
@@ -171,8 +201,9 @@ internal class Program
         {
             Console.WriteLine("Неверное значение, попробуйте снова");
         }
+        TemporaryPerson.Sex = sex;
 
-        return new Person(name, surname, age, sex);
+        return TemporaryPerson;
     }
 
     /// <summary>

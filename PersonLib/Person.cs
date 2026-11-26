@@ -12,6 +12,8 @@ namespace PersonLib
     /// </summary>
     public class Person
     {
+        private string russianPattern = @"^[А-Яа-яЁё]+(?:[ -][А-Яа-яЁё]+)*$";
+        private string englishPattern = @"^[A-Za-z]+(?:[ -][A-Za-z]+)*$";
         const int MaxAge = 120;
         const int MinAge = 0;
 
@@ -61,8 +63,15 @@ namespace PersonLib
             }
             set
             {
-                //if (Regex.IsMatch(_name, ruPattern))
-                _surname = StringFormat.NameFormat(value);
+                if (Regex.IsMatch(_name, russianPattern))
+                {
+                    _surname = StringFormat.RussianFormat(value);
+                }
+                else
+                {
+                    _surname = StringFormat.EnglishFormat(value);
+                }
+                
             }
         }
 

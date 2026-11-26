@@ -6,6 +6,7 @@ using System.Text.RegularExpressions;
 
 namespace PersonLib
 {
+    //TODO: To separate file
     /// <summary>
     /// Пол человека. Их два. Итого один целый.
     /// </summary>
@@ -15,14 +16,17 @@ namespace PersonLib
         Female
     }
 
+    //TODO: To separate file
     /// <summary>
     /// Хранит и предоставляет доступ к набору личной информации о человеке
     /// </summary>
     public class Person
     {
+        //TODO: XML
         private string _name;
         private string _surname;
         private int _age;
+        //TODO: remove
         private Sex _sex;
 
         public string Name
@@ -57,6 +61,7 @@ namespace PersonLib
             }
             set
             {
+                //TODO: domain limits
                 if (value >= 0)
                 {
                     _age = value;
@@ -74,6 +79,7 @@ namespace PersonLib
             Sex = sex;
         }
 
+        //TODO: RSDN
         public Person(): this("Иван","Петров",25,Sex.Male)
         { }
 
@@ -119,10 +125,12 @@ namespace PersonLib
 
 
     /// <summary>
+    /// //TODO: RSDN
     /// Хранит множество объектов класса Person. Позволяет проводить операции над отдельными объектами и группами объектов класса Person
     /// </summary>
     public class PersonList
     {
+        //TODO: XML
         private Person[] _items;
         private int _count;
 
@@ -136,6 +144,7 @@ namespace PersonLib
 
         public PersonList()
         {
+            //TODO: refactor
             _items = new Person[3];
             _count = 0;
         }
@@ -156,6 +165,7 @@ namespace PersonLib
 
         private void Expand()
         {
+            //TODO: RSDN
             Person[] newItems = new Person[_items.Length+1];
             for (int i = 0; i < _items.Length; i++)
             {
@@ -168,18 +178,23 @@ namespace PersonLib
         {
             get
             {
+                //TODO: RSDN
+                //TODO: duplication
                 if (index<0 || index>=_count)
                 {
                     throw new IndexOutOfRangeException();
                 }
+                //TODO: {}
                 else return _items[index];
             }
             set
             {
+                //TODO: duplication
                 if (index < 0 || index >= _count)
                 {
                     throw new IndexOutOfRangeException();
                 }
+                //TODO: {}
                 else _items[index] = value;
             }
         }
@@ -191,6 +206,8 @@ namespace PersonLib
         /// <exception cref="IndexOutOfRangeException"></exception>
         public void RemoveAt(int index)
         {
+            //TODO: refactor
+            //TODO: duplication
             if ( index<0 || index>=_count)
             {
                 throw new IndexOutOfRangeException();
@@ -200,6 +217,7 @@ namespace PersonLib
                 _items[i] = _items[i + 1];
             }
             _count--;
+            //TODO: not safe
             _items[_count] = null;
         }
 
@@ -265,7 +283,7 @@ namespace PersonLib
             }
 
             value = Regex.Replace(value.Trim(), @"\s+", " ");
-
+            //TODO: different languages
             string pattern = @"^[А-Яа-яЁёA-Za-z]+(?:[ -][А-Яа-яЁёA-Za-z]+)*$";
 
             if (!Regex.IsMatch(value, pattern))

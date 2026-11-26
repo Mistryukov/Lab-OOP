@@ -11,6 +11,8 @@ namespace PersonLib
     /// </summary>
     public class PersonList
     {
+        private const int DefaultListLenght = 4;
+        private const int GrowthFactor = 2;
         //TODO: XML +
         /// <summary>
         /// Приватный массив элементов класса Person
@@ -38,8 +40,8 @@ namespace PersonLib
         /// </summary>
         public PersonList()
         {
-            //TODO: refactor
-            _items = new Person[4];
+            //TODO: refactor +
+            _items = new Person[DefaultListLenght];
             _count = 0;
         }
 
@@ -60,7 +62,7 @@ namespace PersonLib
         private void Expand()
         {
             //TODO: RSDN +
-            Person[] newItems = new Person[_items.Length * 2];
+            Person[] newItems = new Person[_items.Length * GrowthFactor];
             for (int i = 0; i < _items.Length; i++)
             {
                 newItems[i] = _items[i];
@@ -70,7 +72,7 @@ namespace PersonLib
 
         private void Shrink()
         {
-            Person[] newItems = new Person[_items.Length / 2];
+            Person[] newItems = new Person[_items.Length / GrowthFactor];
             for (int i = 0; i < _items.Length; i++)
             {
                 newItems[i] = _items[i];
@@ -124,7 +126,7 @@ namespace PersonLib
             {
                 Shrink();
             }
-            //TODO: not safe
+            //TODO: not safe +
             _items[_count] = null;
         }
 

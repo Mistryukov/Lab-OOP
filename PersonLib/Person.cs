@@ -12,8 +12,8 @@ namespace PersonLib
     /// </summary>
     public class Person
     {
-        static int MaxAge = 120;
-        static int MinAge = 0;
+        const int MaxAge = 120;
+        const int MinAge = 0;
 
         //TODO: XML +
         /// <summary>
@@ -43,7 +43,18 @@ namespace PersonLib
             }
             set
             {
-                _name = StringFormat.NameFormat(value);
+                {
+                    try
+                    {
+                        _name = StringFormat.NameFormat(value);
+                        break;
+                    }
+                
+                    catch (ArgumentException exception)
+                    {
+                        Console.WriteLine($"Ошибка: {exception.Message}. Попробуйте снова");
+                    }
+                }
             }
         }
 
@@ -58,6 +69,7 @@ namespace PersonLib
             }
             set
             {
+                //if (Regex.IsMatch(_name, ruPattern))
                 _surname = StringFormat.NameFormat(value);
             }
         }
@@ -74,10 +86,11 @@ namespace PersonLib
             set
             {
                 //TODO: domain limits +
-                if (value >= MinAge && value <= MaxAge)
+                if (value >= MaxAge || value <= MinAge)
                 {
-                    _age = value;
+                    throw new ArgumentException("Возраст вне допустимого диапазона");
                 }
+                _age = value;
             }
         }
 

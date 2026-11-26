@@ -5,27 +5,24 @@ internal class Program
     private static void Main(string[] args)
     {
         //Демонстрация правильности работы
-        Person PersonOne = new Person();
-        Person PersonTwo = new Person("Илья", "Муромец", 52, Sex.Male);
-        Person PersonThree = new Person("Хилари", "Клинтон", 66, Sex.Female);
-        Person PersonFour = new Person("Змей", "Тугарин", 28, Sex.Male);
-        Person PersonFive = new Person("Добрыня", "Никитич", 48, Sex.Male);
-        Person PersonSix = new Person("Джейн", "Доу", 30, Sex.Female);
+       //Person PersonOne = new Person();
+       //Person PersonTwo = new Person("Илья", "Муромец", 52, Sex.Male);
+       //Person PersonThree = new Person("Хилари", "Клинтон", 66, Sex.Female);
+       //Person PersonFour = new Person("Змей", "Тугарин", 28, Sex.Male);
+       //Person PersonFive = new Person("Добрыня", "Никитич", 48, Sex.Male);
+       //Person PersonSix = new Person("Джейн", "Доу", 30, Sex.Female);
         
         //Создание списков персон   
         PersonList FirstList = new PersonList();
-        FirstList.Add(PersonOne);
-        FirstList.Add(PersonTwo);
-        FirstList.Add(PersonThree);
+        //FirstList.Add(PersonOne);
+        //FirstList.Add(PersonTwo);
+        //FirstList.Add(PersonThree);
         
         PersonList SecondList = new PersonList();
-        SecondList.Add(PersonFour);
-        SecondList.Add(PersonFive);
-        SecondList.Add(PersonSix);
+        //SecondList.Add(PersonFour);
+        //SecondList.Add(PersonFive);
+        //SecondList.Add(PersonSix);
 
-        FirstList[2].GetInfo();
-        ListInfo(FirstList);
-        Console.ReadKey();
         ////Вывод содержимого списков на экран
         //Console.WriteLine(
         //    "Нажмите любую клавишу " +
@@ -105,9 +102,9 @@ internal class Program
         //    );
         //ListInfo(SecondList);
         //
-        ////Создание персоны через консольный ввод
-        //Person NewPerson = CreatePerson();
-        //Console.WriteLine(NewPerson.GetInfo());
+        //Создание персоны через консольный ввод
+        Person NewPerson = CreatePerson();
+        Console.WriteLine(NewPerson.GetInfo());
         //
         ////Создание рандомной персоны
         //Person RandomPerson = Person.GetRandomPerson();
@@ -122,8 +119,20 @@ internal class Program
     static Person CreatePerson()
     {
         Console.WriteLine("Введите имя (только ru/eng символы): ");
+        Person TemporaryPerson = new();
         string name = Console.ReadLine();
-    
+        while (true)
+        {
+            if (string.IsNullOrEmpty(name))
+            {
+                Console.WriteLine(
+                    "Имя не может быть пустым"
+                    );
+            }
+            TemporaryPerson.Name = name;
+        }
+        
+
         Console.WriteLine("Введите фамилию (только ru/eng символы): ");
         string surname = Console.ReadLine();
     
@@ -136,6 +145,7 @@ internal class Program
                 "Неверный формат ввода, введите число больше или равное нулю"
                 );
         }
+        TemporaryPerson.Age = age;
 
         Console.WriteLine(
             "Введите цифру, означающую пол или название пола на английском"

@@ -12,13 +12,29 @@ namespace PersonLib
     /// </summary>
     public class Person
     {
-        //TODO: XML
-        private string _name;
-        private string _surname;
-        private int _age;
-        //TODO: remove
-        private Sex _sex;
+        static int MaxAge = 120;
+        static int MinAge = 0;
 
+        //TODO: XML +
+        /// <summary>
+        /// Приватное поле, обозначающее имя персоны
+        /// </summary>
+        private string _name;
+
+        /// <summary>
+        /// Приватное поле, обозначающее фамилию персоны
+        /// </summary>
+        private string _surname;
+
+        /// <summary>
+        /// Приватное поле, обозначающее возраст персоны
+        /// </summary>
+        private int _age;
+        //TODO: remove + removed unused "Sex" property
+
+        /// <summary>
+        /// Свойство объекта класса Person "Имя"
+        /// </summary>
         public string Name
         {
             get
@@ -31,6 +47,9 @@ namespace PersonLib
             }
         }
 
+        /// <summary>
+        /// Свойство объекта класса Person "Фамилия"
+        /// </summary>
         public string Surname
         {
             get
@@ -43,6 +62,9 @@ namespace PersonLib
             }
         }
 
+        /// <summary>
+        /// Свойство объекта класса Person "Возраст"
+        /// </summary>
         public int Age
         {
             get
@@ -51,16 +73,26 @@ namespace PersonLib
             }
             set
             {
-                //TODO: domain limits
-                if (value >= 0)
+                //TODO: domain limits +
+                if (value >= MinAge && value <= MaxAge)
                 {
                     _age = value;
                 }
             }
         }
 
+        /// <summary>
+        /// Свойство объекта класса Person "Пол"
+        /// </summary>
         public Sex Sex { get; set; }
 
+        /// <summary>
+        /// Конструктор объекта класса Person
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="surname"></param>
+        /// <param name="age"></param>
+        /// <param name="sex"></param>
         public Person(string name, string surname, int age, Sex sex)
         {
             Name = name;
@@ -69,8 +101,11 @@ namespace PersonLib
             Sex = sex;
         }
 
-        //TODO: RSDN
-        public Person(): this("Иван","Петров",25,Sex.Male)
+        //TODO: RSDN+
+        /// <summary>
+        /// Конструктор по умолчанию объекта класса Person
+        /// </summary>
+        public Person(): this("Иван", "Петров", 25, Sex.Male)
         { }
 
         /// <summary>
@@ -106,8 +141,8 @@ namespace PersonLib
 
             string name = names[random.Next(names.Length)];
             string surname = surnames[random.Next(surnames.Length)];
-            int age = random.Next(0, 99);
-            Sex sex = (Sex)random.Next(0,2);
+            int age = random.Next(MinAge, MaxAge);
+            Sex sex = (Sex)random.Next(0, 2);
 
             return new Person(name, surname, age, sex);
         }

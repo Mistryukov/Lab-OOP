@@ -5,15 +5,26 @@ using System.Text;
 namespace PersonLib
 {
     /// <summary>
-    /// //TODO: RSDN
-    /// Хранит множество объектов класса Person. Позволяет проводить операции над отдельными объектами и группами объектов класса Person
+    /// //TODO: RSDN +
+    /// Хранит множество объектов класса Person. Позволяет проводить операции
+    /// над отдельными объектами и группами объектов класса Person
     /// </summary>
     public class PersonList
     {
-        //TODO: XML
+        //TODO: XML +
+        /// <summary>
+        /// Приватный массив элементов класса Person
+        /// </summary>
         private Person[] _items;
+
+        /// <summary>
+        /// Приватный счетчик элементов массива объектов класса Person
+        /// </summary>
         private int _count;
 
+        /// <summary>
+        /// Свойство объекта класса PersonList "Счетчик элементов"
+        /// </summary>
         public int Count
         {
             get
@@ -22,10 +33,13 @@ namespace PersonLib
             }
         }
 
+        /// <summary>
+        /// Конструктор по умолчанию объекта класса PersonList
+        /// </summary>
         public PersonList()
         {
             //TODO: refactor
-            _items = new Person[3];
+            _items = new Person[4];
             _count = 0;
         }
 
@@ -45,8 +59,8 @@ namespace PersonLib
 
         private void Expand()
         {
-            //TODO: RSDN
-            Person[] newItems = new Person[_items.Length + 1];
+            //TODO: RSDN +
+            Person[] newItems = new Person[_items.Length * 2];
             for (int i = 0; i < _items.Length; i++)
             {
                 newItems[i] = _items[i];
@@ -54,28 +68,40 @@ namespace PersonLib
             _items = newItems;
         }
 
+        private void Shrink()
+        {
+            Person[] newItems = new Person[_items.Length / 2];
+            for (int i = 0; i < _items.Length; i++)
+            {
+                newItems[i] = _items[i];
+            }
+            _items = newItems;
+        }
+
+        public void IndexCheck(int index)
+        {
+            if (index < 0 || index >= _count)
+            {
+                throw new IndexOutOfRangeException();
+            }
+        }
+
         public Person this[int index]
         {
             get
             {
-                //TODO: RSDN
-                //TODO: duplication
-                if (index < 0 || index >= _count)
-                {
-                    throw new IndexOutOfRangeException();
-                }
-                //TODO: {}
-                else return _items[index];
+                //TODO: RSDN  +
+                //TODO: duplication +
+                IndexCheck(index);
+                //TODO: {} +
+                return _items[index];
             }
             set
             {
-                //TODO: duplication
-                if (index < 0 || index >= _count)
-                {
-                    throw new IndexOutOfRangeException();
-                }
-                //TODO: {}
-                else _items[index] = value;
+                //TODO: duplication +
+                IndexCheck(index);
+                //TODO: {} +
+                _items[index] = value;
             }
         }
 
@@ -86,17 +112,18 @@ namespace PersonLib
         /// <exception cref="IndexOutOfRangeException"></exception>
         public void RemoveAt(int index)
         {
-            //TODO: refactor
-            //TODO: duplication
-            if (index < 0 || index >= _count)
-            {
-                throw new IndexOutOfRangeException();
-            }
+            //TODO: refactor +
+            //TODO: duplication +
+            IndexCheck(index);
             for (int i = index; i < _count - 1; i++)
             {
                 _items[i] = _items[i + 1];
             }
             _count--;
+            if (_count == _items.Length / 2)
+            {
+                Shrink();
+            }
             //TODO: not safe
             _items[_count] = null;
         }

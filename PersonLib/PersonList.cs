@@ -59,6 +59,9 @@ namespace PersonLib
             _count++;
         }
 
+        /// <summary>
+        /// Увеличивает размер списка в заданное количество раз
+        /// </summary>
         private void Expand()
         {
             //TODO: RSDN +
@@ -70,6 +73,9 @@ namespace PersonLib
             _items = newItems;
         }
 
+        /// <summary>
+        /// Уменьшает размер списка в заданное количество раз
+        /// </summary>
         private void Shrink()
         {
             Person[] newItems = new Person[_items.Length / GrowthFactor];
@@ -80,6 +86,11 @@ namespace PersonLib
             _items = newItems;
         }
 
+        /// <summary>
+        /// Проверяет подаваемый индекс на  выход за допустимые границы
+        /// </summary>
+        /// <param name="index"></param>
+        /// <exception cref="IndexOutOfRangeException"></exception>
         public void IndexCheck(int index)
         {
             if (index < 0 || index >= _count)

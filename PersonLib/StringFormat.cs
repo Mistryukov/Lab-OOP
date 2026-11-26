@@ -42,6 +42,12 @@ namespace PersonLib
             return string.Join("-", words);
         }
 
+        /// <summary>
+        /// Приводит слова на русском в необходимый формат
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns>Строка, приведенная под русский формат</returns>
+        /// <exception cref="ArgumentException"></exception>
         public static string RussianFormat(string value)
         {
             value = Regex.Replace(value.Trim(), @"\s+", " ");
@@ -64,6 +70,12 @@ namespace PersonLib
             return string.Join("-", words);
         }
 
+        /// <summary>
+        /// Приводит слова на английском в необходимый формат
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns>Строка, приведенная под английский формат</returns>
+        /// <exception cref="ArgumentException"></exception>
         public static string EnglishFormat(string value)
         {
             value = Regex.Replace(value.Trim(), @"\s+", " ");

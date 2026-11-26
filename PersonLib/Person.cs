@@ -12,8 +12,17 @@ namespace PersonLib
     /// </summary>
     public class Person
     {
+        /// <summary>
+        /// Русский формат для имен-фамилий
+        /// </summary>
         private string russianPattern = @"^[А-Яа-яЁё]+(?:[ -][А-Яа-яЁё]+)*$";
+        /// <summary>
+        /// Максимальный возраст
+        /// </summary>
         const int MaxAge = 120;
+        /// <summary>
+        /// Минимальный   возраст
+        /// </summary>
         const int MinAge = 0;
 
         //TODO: XML +

@@ -133,7 +133,7 @@ internal class Program
                         );
                     continue;
                 }
-
+        
                 TemporaryPerson.Name = name;
                 break;
             }
@@ -142,6 +142,14 @@ internal class Program
                 Console.WriteLine(exception.Message);
             }
         }
+
+        //ActionHandler("wefwefw",
+        //    () =>
+        //    {
+        //        string input = Console.ReadLine();
+        //        TemporaryPerson.Name = input;
+        //
+        //    });
 
         Console.WriteLine("Введите фамилию (только ru/eng символы): ");
         while (true)
@@ -175,7 +183,7 @@ internal class Program
                 if (!int.TryParse(Console.ReadLine(), out age) || age < 0)
                 {
                     Console.WriteLine(
-                        "Неверный формат ввода, введите число больше или равное нулю"
+                        "Неверный формат ввода, введите число в диапазоне (0-120)"
                         );
                     continue;
                 }
@@ -217,5 +225,23 @@ internal class Program
             Console.WriteLine(list[i].GetInfo());
         }
     }
+
+    //private static void ActionHandler(string message, Action<string> action)
+    //{
+    //    while (true)
+    //    {
+    //        Console.WriteLine(message);string input = Console.ReadLine();
+    //        try
+    //        {
+    //            action(input);
+    //            return;
+    //
+    //        }
+    //        catch (ArgumentException exception)
+    //        {
+    //            Console.WriteLine({exception.Message});
+    //        }
+    //    }
+    //}
 }
     

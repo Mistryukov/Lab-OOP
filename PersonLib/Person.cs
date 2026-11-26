@@ -13,7 +13,6 @@ namespace PersonLib
     public class Person
     {
         private string russianPattern = @"^[А-Яа-яЁё]+(?:[ -][А-Яа-яЁё]+)*$";
-        private string englishPattern = @"^[A-Za-z]+(?:[ -][A-Za-z]+)*$";
         const int MaxAge = 120;
         const int MinAge = 0;
 
@@ -89,7 +88,7 @@ namespace PersonLib
                 //TODO: domain limits +
                 if (value >= MaxAge || value <= MinAge)
                 {
-                    throw new ArgumentException("Возраст вне допустимого диапазона");
+                    throw new ArgumentException("Возраст вне допустимого диапазона (0-120)");
                 }
                 _age = value;
             }

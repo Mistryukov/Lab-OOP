@@ -6,7 +6,6 @@ using System.Text.RegularExpressions;
 
 namespace PersonLib
 {
-    //TODO: To separate file +
     /// <summary>
     /// Хранит и предоставляет доступ к набору личной информации о человеке
     /// </summary>
@@ -15,17 +14,22 @@ namespace PersonLib
         /// <summary>
         /// Русский формат для имен-фамилий
         /// </summary>
+        /// //TODO: RSDN
+        /// //TODO: duplication
         private string russianPattern = @"^[А-Яа-яЁё]+(?:[ -][А-Яа-яЁё]+)*$";
+        
+        //TODO: RSDN
         /// <summary>
         /// Максимальный возраст
         /// </summary>
         const int MaxAge = 120;
+
+        //TODO: RSDN
         /// <summary>
         /// Минимальный   возраст
         /// </summary>
         const int MinAge = 0;
 
-        //TODO: XML +
         /// <summary>
         /// Приватное поле, обозначающее имя персоны
         /// </summary>
@@ -40,7 +44,6 @@ namespace PersonLib
         /// Приватное поле, обозначающее возраст персоны
         /// </summary>
         private int _age;
-        //TODO: remove + removed unused "Sex" property
 
         /// <summary>
         /// Свойство объекта класса Person "Имя"
@@ -52,11 +55,9 @@ namespace PersonLib
                 return _name;
             }
             set
-            {
-                {
-                    _name = StringFormat.NameFormat(value);
-                    
-                }
+            {                
+                //TODO: validation
+                _name = StringFormat.NameFormat(value);                
             }
         }
 
@@ -71,6 +72,7 @@ namespace PersonLib
             }
             set
             {
+                //TODO: validation
                 if (Regex.IsMatch(_name, russianPattern))
                 {
                     _surname = StringFormat.RussianFormat(value);
@@ -78,8 +80,7 @@ namespace PersonLib
                 else
                 {
                     _surname = StringFormat.EnglishFormat(value);
-                }
-                
+                }                
             }
         }
 
@@ -94,9 +95,10 @@ namespace PersonLib
             }
             set
             {
-                //TODO: domain limits +
                 if (value >= MaxAge || value <= MinAge)
                 {
+                    //TODO: RSDN
+                    //TODO: duplication
                     throw new ArgumentException("Возраст вне допустимого диапазона (0-120)");
                 }
                 _age = value;

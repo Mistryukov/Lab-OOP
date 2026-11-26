@@ -20,7 +20,7 @@ namespace PersonLib
         public static string NameFormat(string value)
         {
             value = Regex.Replace(value.Trim(), @"\s+", " ");
-            //TODO: different languages +
+            //TODO: duplication
             string russianPattern = @"^[А-Яа-яЁё]+(?:[ -][А-Яа-яЁё]+)*$";
             string englishPattern = @"^[A-Za-z]+(?:[ -][A-Za-z]+)*$";
 
@@ -31,6 +31,7 @@ namespace PersonLib
                     "Введенные данные не соответствуют формату"
                     );
             }
+            //TODO: duplication
             string[] words = value.ToLower().Split(' ', '-');
 
             for (int i = 0; (i < words.Length); i++)
@@ -51,6 +52,7 @@ namespace PersonLib
         public static string RussianFormat(string value)
         {
             value = Regex.Replace(value.Trim(), @"\s+", " ");
+            //TODO: duplication
             string russianPattern = @"^[А-Яа-яЁё]+(?:[ -][А-Яа-яЁё]+)*$";
 
             if (!Regex.IsMatch(value, russianPattern))
@@ -59,6 +61,7 @@ namespace PersonLib
                     "Фамилия  тоже должна быть на русском языке"
                     );
             }
+            //TODO: duplication
             string[] words = value.ToLower().Split(' ', '-');
 
             for (int i = 0; (i < words.Length); i++)
@@ -79,6 +82,7 @@ namespace PersonLib
         public static string EnglishFormat(string value)
         {
             value = Regex.Replace(value.Trim(), @"\s+", " ");
+            //TODO: duplication
             string englishPattern = @"^[A-Za-z]+(?:[ -][A-Za-z]+)*$";
 
             if (!Regex.IsMatch(value, englishPattern))
@@ -89,6 +93,7 @@ namespace PersonLib
             }
             string[] words = value.ToLower().Split(' ', '-');
 
+            //TODO: duplication
             for (int i = 0; (i < words.Length); i++)
             {
                 char[] letters = words[i].ToCharArray();

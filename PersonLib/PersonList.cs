@@ -5,15 +5,17 @@ using System.Text;
 namespace PersonLib
 {
     /// <summary>
-    /// //TODO: RSDN +
     /// Хранит множество объектов класса Person. Позволяет проводить операции
     /// над отдельными объектами и группами объектов класса Person
     /// </summary>
     public class PersonList
     {
+        //TODO: XML
         private const int DefaultListLenght = 4;
+
+        //TODO: XML
         private const int GrowthFactor = 2;
-        //TODO: XML +
+        
         /// <summary>
         /// Приватный массив элементов класса Person
         /// </summary>
@@ -40,7 +42,6 @@ namespace PersonLib
         /// </summary>
         public PersonList()
         {
-            //TODO: refactor +
             _items = new Person[DefaultListLenght];
             _count = 0;
         }
@@ -64,7 +65,6 @@ namespace PersonLib
         /// </summary>
         private void Expand()
         {
-            //TODO: RSDN +
             Person[] newItems = new Person[_items.Length * GrowthFactor];
             for (int i = 0; i < _items.Length; i++)
             {
@@ -99,21 +99,17 @@ namespace PersonLib
             }
         }
 
+        //TODO: XML
         public Person this[int index]
         {
             get
             {
-                //TODO: RSDN  +
-                //TODO: duplication +
                 IndexCheck(index);
-                //TODO: {} +
                 return _items[index];
             }
             set
             {
-                //TODO: duplication +
                 IndexCheck(index);
-                //TODO: {} +
                 _items[index] = value;
             }
         }
@@ -125,8 +121,6 @@ namespace PersonLib
         /// <exception cref="IndexOutOfRangeException"></exception>
         public void RemoveAt(int index)
         {
-            //TODO: refactor +
-            //TODO: duplication +
             IndexCheck(index);
             for (int i = index; i < _count - 1; i++)
             {
@@ -137,7 +131,6 @@ namespace PersonLib
             {
                 Shrink();
             }
-            //TODO: not safe +
             _items[_count] = null;
         }
 
@@ -157,6 +150,7 @@ namespace PersonLib
             }
             return -1;
         }
+
         /// <summary>
         /// Очищает список, удаляя всех персон
         /// </summary>
